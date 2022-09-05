@@ -1,10 +1,14 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
+// Added resetPasswordToken and resetPasswordExpires to UserSchema below. 
+// They have no values as they are set only after password reset is submitted, and are not set when a user is created
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
-  password: String
+  password: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 })
 
 

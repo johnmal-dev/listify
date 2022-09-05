@@ -55,6 +55,26 @@ const User = require('../models/User')
       title: 'Create Account'
     })
   }
+// added new controller for forgot below
+  exports.getForgot = (req, res) => {
+    res.render('forgot', {
+      title: 'Forgot',
+      user: req.user
+    })
+  }
+
+// added new controller for reset below
+exports.getReset = (req, res) => {
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      return res.redirect('/forgot');
+    }
+    res.render('reset', {
+      user: req.user
+    });
+  });
+};
   
   exports.postSignup = (req, res, next) => {
     const validationErrors = []
