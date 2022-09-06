@@ -14,7 +14,7 @@
             You have <%= left %> thing<%= left == 1 ? '' : 's'%> left to do.
           </h6>
           <a
-            class="btn btn-primary btn-sm"
+            class="btn btn-primary btn-sm m-2"
             href="/logout"
             >Logout</a
           >
@@ -56,7 +56,7 @@
           <!-- joe -->
           <a
             href="todos?sortBy=importance&direction=<%= query.direction === 'asc'?'desc':'asc'%>"
-            class="btn btn-outline-primary btn-sm"
+            class="btn btn-outline-primary btn-sm mb-2"
             >Sort By Importance</a
           >
           <ul class="taskList">
@@ -80,7 +80,7 @@
               type="button"
               name="show history"
               value="Hide History"
-              class="showButton btn btn-outline-primary btn-sm"
+              class="showButton btn btn-outline-primary btn-sm mb-2"
             />
           </form>
           <ul
