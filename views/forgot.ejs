@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); %>
+    <title>Forgot Password</title>
+</head>
+<body class="index-screen background-img">
+    <div class="login-container card">
+      <div class="card-body">
+        <%- include('./partials/logo'); %>
+        <h3 class="card-title text-center">Reset Password</h3>
+        <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => {
+        %>
+        <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+        messages.info.forEach( el => { %>
+        <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %> <% } %>
+    <form
+    action="/forgot"
+    method="POST"
+    >
+    <div class="d-flex flex-column">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        placeholder="Enter email"
+        class="form-control mb-2"
+      />
+      <input
+        type="submit"
+        class="btn btn-lg btn-primary mt-2"
+      />
+      <div class="card-body text-center border-top">
+        <a href="/login">Back to login</a>
+    </div>
+  </form>
+</body>
+</html>

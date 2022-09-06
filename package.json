@@ -10,8 +10,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "async": "^3.2.4",
     "bcrypt": "^5.0.1",
+    "bcrypt-nodejs": "^0.0.3",
     "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
