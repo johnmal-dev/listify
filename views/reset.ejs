@@ -8,8 +8,8 @@
     <div class="login-container card">
       <!-- logo and CSS styling isnt working because I haven't setup the MVC style of GET routing yet I think... will try to finish this later,
       it still works and looks in a similar style. Terminal is saying it's trying to get CSS from /reset/css/style.css and /reset/images/logo.png-->
-      <!-- <div class="card-body">
-        <%- include('./partials/logo'); %>  -->
+      <div class="card-body">
+        <%- include('./partials/logo'); %> 
         <h3 class="card-title text-center">Reset Listify Password</h3>
         <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => {
         %>
@@ -22,7 +22,7 @@
     method="POST"
     >
     <div class="d-flex flex-column">
-      <label for="password">New Password</label>
+      <label for="inputPassword">New Password</label>
       <input
         id="inputPassword"
         type="password"
@@ -30,9 +30,9 @@
         placeholder="New Password"
         class="form-control mb-2"
       />
-      <label for="confirm">Confirm Password</label>
+      <label for="inputConfirmPassword">Confirm Password</label>
       <input
-        id="inputPassword"
+        id="inputConfirmPassword"
         type="password"
         name="confirm"
         placeholder="Confirm Password"
@@ -42,6 +42,7 @@
         type="submit"
         class="btn btn-lg btn-primary mt-2"
       />
+      </div>
     </div>
   </form>
 </body>
