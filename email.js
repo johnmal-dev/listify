@@ -8,9 +8,9 @@ const User = require('./models/User')
 module.exports = {
     cronJob: () => {
        // schedule testing
-        cron.schedule("*/10 * * * * *", () => {
-            console.log("Saying hello from the cronjob")
-        });
+        // cron.schedule("*/10 * * * * *", () => {
+        //     console.log("Saying hello from the cronjob")
+        // });
 
         // changed cron schedule so it will send email at midnight every day.
         cron.schedule("0 10 12 * * *", () => {
