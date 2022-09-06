@@ -114,3 +114,68 @@ exports.getReset = (req, res) => {
       })
     })
   }
+
+  exports.postForgot = (req, res, next) => {
+    async.waterfall(
+      [
+        function (done) {
+          crypto.randomBytes(20, function (err, buf) {
+            var token = buf.toString('hex')
+            done(err, token)
+          })
+        },
+  
+        // the below flash doesnt appear to function correctly -- it wont flash the message, although it does redirect correctly
+  
+        function (token, done) {
+          User.findOne({ email: req.body.email }, function (err, user) {
+            if (!user) {
+              req.flash(
+                'errorforgot',
+                'No account with that email address exists.'
+              )
+              return res.redirect('/forgot')
+            }
+  
+            user.resetPasswordToken = token
+            user.resetPasswordExpires = Date.now() + 3600000 // 1 hour
+  
+            user.save(function (err) {
+              done(err, token, user)
+            })
+          })
+        },
+        function (token, user, done) {
+          const smtpTransport = nodemailer.createTransport({
+            service: 'Zoho',
+            auth: {
+              user: 'listifypassreset100@gmail.com',
+              pass: 'UDsQjUkGz2vq', // this is an application password, not a login password to Zoho, so we can leave it as is, or could do it via .env instead
+            },
+          })
+          const mailOptions = {
+            to: user.email,
+            from: 'listifypassreset100@zohomail.com',
+            subject: 'Password Reset for Listify',
+            text:
+              'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+              'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+              'http://' +
+              req.headers.host +
+              '/reset/' +
+              token +
+              '\n\n' +
+              'If you did not request this, please ignore this email and your password will remain unchanged.\n',
+          }
+          smtpTransport.sendMail(mailOptions, function (err) {
+            // req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.'); // this is creating an empty red flash box, flash seems to use the 'info' part but it isnt linking to our currently established flash setup.
+            done(err, 'done')
+          })
+        },
+      ],
+      function (err) {
+        if (err) return next(err)
+        res.redirect('/forgot')
+      }
+    )
+  }
