@@ -52,13 +52,9 @@ bcrypt, connect-mongo, dotenv, ejs, express, express-flash, express-session, mon
 
 # Contributors
 
-<<<<<<< HEAD
 **:point_right: Alex**
 :computer: [Github](https://github.com/aapaine07)
 :e-mail: [aapaine@gmail.com](mailto:aapaine@gmail.com)
-=======
-Jasmine (Jaz): https://github.com/jasmine-9000 // discord: jaz#6833 // wrkerr9@gmail.com 
->>>>>>> jasminesbranch
 
 **:point_right: Jaz**
 :computer: [Github](https://github.com/jasmine-9000)
