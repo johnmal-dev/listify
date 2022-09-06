@@ -1,5 +1,5 @@
-html{
-  font-size:16px;
+html {
+  font-size: 16px;
 }
 
 .completed {
@@ -16,36 +16,39 @@ ul {
 
 .historyForm {
   /*center the show history button in todos.ejs*/
-  margin:0 auto;
+  margin: 0 auto;
 }
 
-body{
-  display:flex;
-  justify-content:center;
+body {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 .todosmain {
-  padding-top:2rem;
+  padding-top: 2rem;
   display: flex;
   flex-direction: row;
   min-height: 30rem;
 }
-.todosmain{
+.todosmain {
   background-color: white;
 }
-.createTodosSection, .taskListSection, .todosHistory{
-  margin-right:2rem;
-  width:25%;
+.createTodosSection,
+.taskListSection,
+.todosHistory {
+  margin-right: 2rem;
+  width: 25%;
 }
-.logoutSection{
-  margin-left:auto;
+.logoutSection {
+  margin-left: auto;
 }
-.taskListSection >ul, .historyList{
-  padding:0;
-  font-size:1.25rem;
+.taskListSection > ul,
+.historyList {
+  padding: 0;
+  font-size: 1.25rem;
   text-align: center;
 }
-ul+h2{
+ul + h2 {
   font-size: 1.25rem;
 }
 .background-img {
@@ -91,12 +94,22 @@ ul+h2{
   width: 300px;
 }
 
-.historyForm{
-    /*center the show history button in todos.ejs*/
-    display:flex;
-    justify-content: center;
+.historyForm {
+  /*center the show history button in todos.ejs*/
+  display: flex;
+  justify-content: center;
 }
-body{
-    display:flex;
-    flex-direction:row;
+body {
+  display: flex;
+  flex-direction: row;
+}
+
+footer a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #3a3b3c;
+}
+
+footer p {
+  margin-bottom: 0.5rem;
 }
