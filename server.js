@@ -20,13 +20,17 @@ const async = require('async')
 const crypto = require('crypto') // doesnt need to be installed as a module, this comes by default with Node.js -- used to generate random token during password reset
 const User = require('./models/User') // bringing in the User constant from models to test below code
 
-require('dotenv').config({path: './config/.env'})
+const { cronJob } = require('./email')
+
+cronJob() // start all cronjobs
+
+require('dotenv').config({ path: './config/.env' })
 
 // Passport config
 require('./config/passport')(passport)
 
 connectDB()
-
+//test
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
@@ -38,20 +42,20 @@ app.use(cookieParser())
 
 // Sessions
 app.use(
-    session({
-      secret: 'keyboard cat',
-      resave: false,
-      saveUninitialized: false,
-      store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    })
-  )
-  
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+)
+
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(flash())
-  
+
 app.use('/', mainRoutes)
 app.use('/todos', todoRoutes)
  
@@ -165,3 +169,24 @@ app.post('/reset/:token', function(req, res) {
     res.redirect('/');
   });
 });
+
+// get all things
+app.get('/getallemails', async (req, res) => {
+  const allEmails = await getAllEmails()
+  if (allEmails) {
+    res.send(allEmails)
+  } else {
+    res.status(503).send('An internal server error occured.')
+  }
+})
+
+async function getAllEmails() {
+  try {
+    const allUsers = await User.find({}, { email: 1, _id: 1 })
+    return allUsers
+  } catch (err) {
+    console.log('An error occurred: ')
+    console.log(err)
+    return null
+  }
+}
