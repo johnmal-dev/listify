@@ -2,6 +2,15 @@ const passport = require('passport')
 const validator = require('validator')
 const User = require('../models/User')
 
+//added new requires below for password reset functionality
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const nodemailer = require('nodemailer')
+const LocalStrategy = require('passport-local').Strategy
+const bcrypt = require('bcrypt-nodejs')
+const async = require('async')
+const crypto = require('crypto') // doesnt need to be installed as a module, this comes by default with Node.js -- used to generate random token during password reset
+
  exports.getLogin = (req, res) => {
     if (req.user) {
       return res.redirect('/todos')
